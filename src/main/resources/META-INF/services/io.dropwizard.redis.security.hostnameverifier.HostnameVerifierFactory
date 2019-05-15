@@ -1,0 +1,2 @@
+io.dropwizard.redis.security.hostnameverifier.DefaultHostnameVerifierFactory
+io.dropwizard.redis.security.hostnameverifier.NoopHostnameVerifierFactory

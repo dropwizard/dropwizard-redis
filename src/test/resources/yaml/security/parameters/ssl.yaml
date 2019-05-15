@@ -1,0 +1,9 @@
+cipherSuites:
+  - "abc"
+  - "123"
+protocols:
+  - protocol1
+needClientAuth: true
+sniHostNames:
+  - localhost
+preferLocalCipherSuites: true

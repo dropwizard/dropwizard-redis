@@ -1,0 +1,3 @@
+io.dropwizard.redis.security.hostnameverifier.HostnameVerifierFactory
+io.dropwizard.redis.security.socket.SSLSocketFactoryFactory
+io.dropwizard.redis.RedisClusterClientFactory

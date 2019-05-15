@@ -1,0 +1,28 @@
+dist: xenial
+language: java
+jdk:
+  - openjdk8
+  - openjdk11
+before_install:
+  - rm ~/.m2/settings.xml || true
+  - ulimit -c unlimited -S
+after_success:
+  - bash ci/after_success.sh
+cache:
+  directories:
+    - "$HOME/.m2"
+deploy:
+  - provider: script
+    script: bash ci/deploy-snapshot.sh
+    on:
+      repo: dropwizard/dropwizard-redis
+      tags: false
+      branch: master
+      jdk: openjdk8
+  - provider: script
+    script: bash ci/deploy-release.sh
+    on:
+      repo: dropwizard/dropwizard-redis
+      tags: true
+      branch: release
+      jdk: openjdk8
