@@ -1,0 +1,5 @@
+io.dropwizard.redis.delay.ConstantDelayFactory
+io.dropwizard.redis.delay.DecorrelatedJitterDelayFactory
+io.dropwizard.redis.delay.EqualJitterDelayFactory
+io.dropwizard.redis.delay.ExponentialDelayFactory
+io.dropwizard.redis.delay.FullJitterDelayFactory

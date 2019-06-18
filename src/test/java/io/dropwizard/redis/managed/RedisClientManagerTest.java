@@ -1,9 +1,9 @@
 package io.dropwizard.redis.managed;
 
+import io.lettuce.core.AbstractRedisClient;
+import io.lettuce.core.api.StatefulConnection;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.Closeable;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -12,13 +12,14 @@ import static org.mockito.Mockito.verify;
 public class RedisClientManagerTest {
     private static final String NAME = "redis";
 
-    private final Closeable client = mock(Closeable.class);
+    private final AbstractRedisClient client = mock(AbstractRedisClient.class);
+    private final StatefulConnection connection = mock(StatefulConnection.class);
 
-    private final RedisClientManager redisClientManager = new RedisClientManager(client, NAME);
+    private final RedisClientManager redisClientManager = new RedisClientManager(client, connection, NAME);
 
     @Before
     public void setUp() throws Exception {
-        reset(client);
+        reset(client, connection);
     }
 
     @Test
@@ -27,6 +28,7 @@ public class RedisClientManagerTest {
         redisClientManager.stop();
 
         // then
-        verify(client).close();
+        verify(connection).close();
+        verify(client).shutdown();
     }
 }

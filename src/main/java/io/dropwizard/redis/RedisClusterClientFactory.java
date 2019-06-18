@@ -3,116 +3,70 @@ package io.dropwizard.redis;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.dropwizard.jackson.Discoverable;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
-import io.dropwizard.redis.health.Pingable;
+import io.dropwizard.redis.clientoptions.ClusterClientOptionsFactory;
 import io.dropwizard.redis.health.RedisHealthCheck;
-import io.dropwizard.redis.pool.JedisPoolConfigFactory;
-import io.dropwizard.util.Duration;
-import redis.clients.jedis.commands.JedisClusterCommands;
+import io.dropwizard.redis.managed.RedisClientManager;
+import io.dropwizard.redis.uri.RedisURIFactory;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.cluster.RedisClusterClient;
+import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
+import io.lettuce.core.codec.RedisCodec;
+import io.lettuce.core.resource.ClientResources;
+import io.lettuce.core.tracing.Tracing;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-/**
- * Factory to build {@link JedisClusterCommands} instances.
- */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-public abstract class RedisClusterClientFactory implements Discoverable {
-    @NotNull
-    @JsonProperty
-    protected String name;
-
-    @JsonProperty
-    protected boolean metricsEnabled = true;
-
+@JsonTypeName("cluster")
+public class RedisClusterClientFactory<K, V> extends AbstractRedisClientFactory<K, V> {
     @Valid
     @NotNull
     @JsonProperty
-    protected JedisPoolConfigFactory pool = new JedisPoolConfigFactory();
+    private ClusterClientOptionsFactory clientOptions = new ClusterClientOptionsFactory();
 
-    @NotNull
-    @JsonProperty
-    protected Duration connectionTimeout = Duration.seconds(2);
-
-    @NotNull
-    @JsonProperty
-    protected Duration socketTimeout = Duration.seconds(2);
-
-    @JsonProperty
-    protected String password;
-
-    @Min(-1)
-    @JsonProperty
-    protected int maxAttempts = 5; // matches BinaryJedisCluster.DEFAULT_MAX_ATTEMPTS
-
-    public String getName() {
-        return name;
+    public ClusterClientOptionsFactory getClientOptions() {
+        return clientOptions;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setClientOptions(final ClusterClientOptionsFactory clientOptions) {
+        this.clientOptions = clientOptions;
     }
 
-    public boolean isMetricsEnabled() {
-        return metricsEnabled;
+    @Override
+    public StatefulRedisClusterConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
+                                                      final MetricRegistry metrics) {
+        return build(healthChecks, lifecycle, metrics, null);
     }
 
-    public void setMetricsEnabled(final boolean metricsEnabled) {
-        this.metricsEnabled = metricsEnabled;
-    }
+    @Override
+    public StatefulRedisClusterConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
+                                                      final MetricRegistry metrics, final Tracing tracing) {
 
-    public JedisPoolConfigFactory getPool() {
-        return pool;
-    }
+        final List<RedisURI> uris = nodes.stream()
+                .map(RedisURIFactory::build)
+                .collect(Collectors.toList());
 
-    public void setPool(final JedisPoolConfigFactory pool) {
-        this.pool = pool;
-    }
+        final ClientResources resources = clientResources.build(name, metrics, tracing);
 
-    public Duration getConnectionTimeout() {
-        return connectionTimeout;
-    }
+        final RedisClusterClient redisClusterClient = RedisClusterClient.create(resources, uris);
 
-    public void setConnectionTimeout(final Duration connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-    }
+        redisClusterClient.setOptions(clientOptions.build());
 
-    public Duration getSocketTimeout() {
-        return socketTimeout;
-    }
+        final RedisCodec<K, V> codec = redisCodec.build();
 
-    public void setSocketTimeout(final Duration socketTimeout) {
-        this.socketTimeout = socketTimeout;
-    }
+        final StatefulRedisClusterConnection<K, V> connection = redisClusterClient.connect(codec);
 
-    public String getPassword() {
-        return password;
-    }
+        // manage
+        lifecycle.manage(new RedisClientManager<K, V>(redisClusterClient, connection, name));
 
-    public void setPassword(final String password) {
-        this.password = password;
-    }
+        // health checks
+        healthChecks.register(name, new RedisHealthCheck(() -> connection.sync().ping()));
 
-    public int getMaxAttempts() {
-        return maxAttempts;
+        return connection;
     }
-
-    public void setMaxAttempts(final int maxAttempts) {
-        this.maxAttempts = maxAttempts;
-    }
-
-    /**
-     * By default, creates a master-based {@link RedisHealthCheck}. May be overridden to customize health-check logic if desired.
-     * @param client pinag-able client.
-     * @return Health check.
-     */
-    protected RedisHealthCheck createRedisHealthCheck(final Pingable client) {
-        return new RedisHealthCheck(client);
-    }
-
-    public abstract JedisClusterCommands build(MetricRegistry metrics, HealthCheckRegistry healthChecks, LifecycleEnvironment lifecycle)
-            throws Exception;
 }

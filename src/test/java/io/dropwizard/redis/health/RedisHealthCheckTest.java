@@ -1,9 +1,9 @@
 package io.dropwizard.redis.health;
 
+import io.lettuce.core.RedisException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import redis.clients.jedis.exceptions.JedisException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -38,7 +38,7 @@ public class RedisHealthCheckTest {
 
     @Test
     public void shouldReturnUnhealthyIfPingThrowsException() {
-        when(client.ping()).thenThrow(new JedisException("failed for some reason"));
+        when(client.ping()).thenThrow(new RedisException("failed for some reason"));
         assertThat(healthCheck.check().isHealthy(), is(false));
     }
 }
