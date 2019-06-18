@@ -1,7 +1,7 @@
 package io.dropwizard.redis.uri;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.redis.HostAndPort;
+import com.google.common.net.HostAndPort;
 import io.dropwizard.util.Duration;
 import io.lettuce.core.RedisURI;
 
