@@ -4,11 +4,19 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.google.common.collect.ImmutableList;
 import io.dropwizard.jackson.Discoverable;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.redis.clientresources.ClientResourcesFactory;
 import io.dropwizard.redis.clientresources.DefaultClientResourcesFactory;
 import io.dropwizard.redis.codec.RedisCodecFactory;
+import io.dropwizard.redis.metrics.event.visitor.ClusterTopologyChangedEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.CommandLatencyEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.ConnectedEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.ConnectionActivatedEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.ConnectionDeactivatedEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.DisconnectedEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
 import io.dropwizard.redis.uri.RedisURIFactory;
 import io.dropwizard.validation.MinSize;
 import io.lettuce.core.api.StatefulConnection;
@@ -94,4 +102,16 @@ public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {
 
     public abstract StatefulConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
                                                    final MetricRegistry metrics, final Tracing tracing);
+
+    List<EventVisitor> buildEventVisitors(final MetricRegistry metrics) {
+        // Extract this, and the event wrapper builders, to Dropwizard factories, if more event types are added frequently enough?
+        return ImmutableList.of(
+                new ClusterTopologyChangedEventVisitor(name, metrics),
+                new CommandLatencyEventVisitor(name, metrics),
+                new ConnectedEventVisitor(name, metrics),
+                new ConnectionActivatedEventVisitor(name, metrics),
+                new ConnectionDeactivatedEventVisitor(name, metrics),
+                new DisconnectedEventVisitor(name, metrics)
+        );
+    }
 }
