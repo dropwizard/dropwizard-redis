@@ -7,22 +7,27 @@ import io.lettuce.core.tracing.Tracing;
 import io.netty.util.concurrent.EventExecutorGroup;
 import reactor.core.scheduler.Schedulers;
 
+import javax.annotation.Nullable;
+
 @JsonTypeName("default")
 public class DefaultClientResourcesFactory extends ClientResourcesFactory {
     @Override
-    public DefaultClientResources build(final String name, final MetricRegistry metrics, final Tracing tracing) {
+    public DefaultClientResources build(final String name, final MetricRegistry metrics, @Nullable final Tracing tracing) {
         final EventExecutorGroup executorGroup = eventExecutorGroup.build(computationThreads, name, metrics);
 
         final DefaultClientResources.Builder builder = DefaultClientResources.builder()
                 .commandLatencyCollector(commandLatencyCollector.build())
                 .commandLatencyPublisherOptions(eventPublisherOptions.build())
-                .tracing(tracing)
                 .eventExecutorGroup(executorGroup)
                 .eventBus(eventBusFactory.build(Schedulers.fromExecutor(executorGroup)))
                 .computationThreadPoolSize(computationThreads)
                 .ioThreadPoolSize(ioThreads)
                 .eventLoopGroupProvider(eventLoopGroupProvider.build(computationThreads))
                 .reconnectDelay(delay.build());
+
+        if (tracing != null) {
+            builder.tracing(tracing);
+        }
 
         // TODO: add netty customizer
         // TODO: add dns resolver

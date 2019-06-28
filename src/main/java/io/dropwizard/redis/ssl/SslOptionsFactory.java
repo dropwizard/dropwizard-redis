@@ -3,7 +3,6 @@ package io.dropwizard.redis.ssl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.lettuce.core.SslOptions;
 import io.netty.handler.ssl.SslProvider;
-import org.hibernate.validator.constraints.URL;
 
 import java.io.File;
 
@@ -24,7 +23,6 @@ public class SslOptionsFactory {
     @JsonProperty
     private String keystorePassword;
 
-    @URL
     @NotNull
     @JsonProperty
     private File truststore;

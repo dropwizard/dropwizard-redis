@@ -1,0 +1,6 @@
+type: default
+targetUnit: SECONDS
+targetPercentiles: [50.0, 99.0]
+resetLatenciesAfterEvent: true
+localDistinction: true
+enabled: true

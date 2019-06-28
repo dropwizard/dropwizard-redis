@@ -3,6 +3,7 @@ package io.dropwizard.redis.clientoptions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.redis.topology.ClusterTopologyRefreshOptionsFactory;
 import io.lettuce.core.cluster.ClusterClientOptions;
+import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -50,7 +51,8 @@ public class ClusterClientOptionsFactory extends ClientOptionsFactory {
                 .maxRedirects(maxRedirects);
 
         if (topologyRefreshOptions != null) {
-            builder.topologyRefreshOptions(topologyRefreshOptions.build());
+            final ClusterTopologyRefreshOptions clusterTopologyRefreshOptions = topologyRefreshOptions.build();
+            builder.topologyRefreshOptions(clusterTopologyRefreshOptions);
         }
 
         return builder.build();

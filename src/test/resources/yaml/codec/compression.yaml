@@ -1,0 +1,4 @@
+type: compression
+delegatee:
+  type: string
+compressionType: GZIP

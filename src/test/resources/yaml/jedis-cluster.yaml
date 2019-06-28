@@ -1,7 +1,0 @@
-type: jedis
-name: dev
-nodes:
-- host: localhost
-  port: 6371
-metricsEnabled: true
-password: hunter2

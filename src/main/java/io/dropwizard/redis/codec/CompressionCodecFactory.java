@@ -19,6 +19,22 @@ public class CompressionCodecFactory<K, V> implements RedisCodecFactory<K, V> {
     @JsonProperty
     private CompressionCodec.CompressionType compressionType;
 
+    public RedisCodecFactory<K, V> getDelegatee() {
+        return delegatee;
+    }
+
+    public void setDelegatee(final RedisCodecFactory<K, V> delegatee) {
+        this.delegatee = delegatee;
+    }
+
+    public CompressionCodec.CompressionType getCompressionType() {
+        return compressionType;
+    }
+
+    public void setCompressionType(final CompressionCodec.CompressionType compressionType) {
+        this.compressionType = compressionType;
+    }
+
     @Override
     public RedisCodec<K, V> build() {
         return CompressionCodec.valueCompressor(delegatee.build(), compressionType);

@@ -5,20 +5,21 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.dropwizard.validation.MinSize;
 import io.lettuce.core.metrics.DefaultCommandLatencyCollector;
 import io.lettuce.core.metrics.DefaultCommandLatencyCollectorOptions;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @JsonTypeName("default")
 public class DefaultCommandLatencyCollectorFactory implements CommandLatencyCollectorFactory {
-
     @NotNull
     @JsonProperty
     private TimeUnit targetUnit = DefaultCommandLatencyCollectorOptions.DEFAULT_TARGET_UNIT;
 
     @NotNull
-    @MinSize(1)
+    @Size(min = 1)
     @JsonProperty
     private double[] targetPercentiles = DefaultCommandLatencyCollectorOptions.DEFAULT_TARGET_PERCENTILES;
 

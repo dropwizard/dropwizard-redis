@@ -1,0 +1,5 @@
+enabled: true
+keystore: src/test/resources/keystore.p12
+keystorePassword: hunter2
+truststore: src/test/resources/truststore.p12
+truststorePassword: hunter2

@@ -1,11 +1,11 @@
 package io.dropwizard.redis.metrics.event.wrapper;
 
-import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.CommandLatencyEventVisitor;
 import io.lettuce.core.event.metrics.CommandLatencyEvent;
 
 import static java.util.Objects.requireNonNull;
 
-public class VisitableCommandLatencyEventWrapper implements VisitableEventWrapper {
+public class VisitableCommandLatencyEventWrapper implements VisitableEventWrapper<CommandLatencyEventVisitor> {
     private final CommandLatencyEvent event;
 
     public VisitableCommandLatencyEventWrapper(final CommandLatencyEvent event) {
@@ -13,7 +13,7 @@ public class VisitableCommandLatencyEventWrapper implements VisitableEventWrappe
     }
 
     @Override
-    public void accept(final EventVisitor visitor) {
+    public void accept(final CommandLatencyEventVisitor visitor) {
         visitor.visit(event);
     }
 }
