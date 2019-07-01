@@ -1,22 +1,22 @@
 # dropwizard-redis
 
-Provides easy integration for Dropwizard applications with Redis.
+Provides easy integration for Dropwizard applications with Redis via the Lettuce library.
 
 This bundle comes with out-of-the-box support for:
 * Configuration
-* Clientlifecycle management
+* Client lifecycle management
 * Client health checks
-* Metrics integration
+* Dropwizard Metrics integration
 
 For more information on Redis, take a look at the official documentation here: https://redis.io/documentation
 
-For More information on the Redis client used (Jedis), see: https://github.com/xetorthio/jedis
+For More information on the Redis client used (Lettuce), see: https://github.com/lettuce-io/lettuce-core
 
 ## Future Improvements
-* Distributed tracing instrumentation for Jedis.
-* Support for the pooled Jedis client
-* Support for the sentinel Jedis client
-* SSL support for the cluster Jedis client (once Jedis supports this) 
+* Distributed tracing instrumentation integration for the Lettuce client.
+* Support for the Lettuce cluster client.
+* Support for the Lettuce sentinel client
+* Support the the Lettuce basic Redis client 
 
 ## Usage
 Add dependency on library.
@@ -43,20 +43,20 @@ In your Dropwizard configuration class, configure a `RedisClusterClientFactory`
 private RedisClusterClientFactory redis;
 ```
 
-### Jedis Cluster Client
+### Lettuce Cluster Client
 In your Dropwizard `Configuration` class, configure a `RedisClusterClientFactory`:
 ```java
 @Valid
 @NotNull
 @JsonProperty("redis-cluster")
-private RedisClusterClientFactory redisClusterClientFactory;
+private RedisClusterClientFactory<String, String> redisClusterClientFactory;
 ```
 
 Then, in your `Application` class, you'll want to do something similar to the following:
 ```java
-private final RedisClusterClientBundle<ExampleConfiguration> redisCluster = new RedisClusterClientBundle<ExampleConfiguration>() {
+private final RedisClusterClientBundle<String, String, ExampleConfiguration> redisCluster = new RedisClusterClientBundle<String, String, ExampleConfiguration>() {
     @Override
-    public RedisClusterClientFactory getRedisClusterClientFactory(ExampleConfiguration configuration) {
+    public RedisClusterClientFactory<String, String> getRedisClusterClientFactory(ExampleConfiguration configuration) {
         return configuration.getRedisClusterClientFactory();
     }
 };
@@ -68,42 +68,23 @@ public void initialize(Bootstrap<ExampleConfiguration> bootstrap) {
 
 @Override
 public void run(ExampleConfiguration config, Environment environment) {
-    final PersonCache personCache = new personCache(kafkaProducer.getClusterClient());
+    final StatefulRedisClusterConnection<String, String> clusterConnection = redisCluster.getClusterConnection();
+    final PersonCache personCache = new PersonCache(clusterConnection); // PersonCache is an arbtirary example
     environment.jersey().register(new PersonResource(personCache));
 }
 ```
 
 Configure your factory in your `config.yml` file:
-```
-type: jedis
-name: dev
-metricsEnabled: true # default
-pool:
-  maxTotalConnections: 8 # default
-  minIdleConnections: 0 # default
-  maxIdleConnections: 8 # default
-  jmxEnabled: true # default
-  jmxNameBase: some-base-name
-  jmxNamePrefix: some-prefix
-  blockWhenExhausted: true # default
-  timeBetweenEvictionRuns: 10s
-  testWhileIdle: false # default
-  testOnReturn: false # default
-  testOnBorrow: false # default
-  testOnCreate: false # default
-  minEvictableIdleTime: 30s # default
-  softMinEvictableIdleTime: 15s
-  maxWait: 5s
-  testsPerEvictionRun: 3 # default
-  evictionPolicy: "org.apache.commons.pool2.impl.DefaultEvictionPolicy" # default
-  evictorShutdownTimeout: 10s # default
-  fairness: false # default
-  lifo: true # default
-connectionTimeout: 2s # default
-socketTimeout: 2s # default
-maxAttempts: 5 # default
-password: hunter2
-nodes:
-- host: localhost
-  port: 6371
+```yaml
+type: cluster
+name: my-redis-use-case
+nodes: 
+  - node:
+      host: 127.0.0.1
+      port: 6379
+   clientName: person-app
+   password: hunter2
+   redisCodec:
+     type: string
+  # TODO: add more configs than just the required basics
 ```

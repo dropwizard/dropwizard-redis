@@ -1,5 +1,6 @@
 package io.dropwizard.redis;
 
+import brave.Tracing;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.redis.clientoptions.ClientOptionsFactory;
 import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.tracing.Tracing;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

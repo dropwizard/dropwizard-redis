@@ -1,5 +1,6 @@
 package io.dropwizard.redis;
 
+import brave.Tracing;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,11 +22,11 @@ import io.dropwizard.redis.uri.RedisURIFactory;
 import io.dropwizard.validation.MinSize;
 import io.lettuce.core.api.StatefulConnection;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
-import io.lettuce.core.tracing.Tracing;
 
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -101,7 +102,7 @@ public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {
     }
 
     public abstract StatefulConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
-                                                   final MetricRegistry metrics, final Tracing tracing);
+                                                   final MetricRegistry metrics, @Nullable final Tracing tracing);
 
     List<EventVisitor> buildEventVisitors(final MetricRegistry metrics) {
         // Extract this, and the event wrapper builders, to Dropwizard factories, if more event types are added frequently enough?

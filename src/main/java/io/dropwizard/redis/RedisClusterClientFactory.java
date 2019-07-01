@@ -1,5 +1,6 @@
 package io.dropwizard.redis;
 
+import brave.Tracing;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,12 +18,12 @@ import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.resource.ClientResources;
-import io.lettuce.core.tracing.Tracing;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -49,7 +50,7 @@ public class RedisClusterClientFactory<K, V> extends AbstractRedisClientFactory<
 
     @Override
     public StatefulRedisClusterConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
-                                                      final MetricRegistry metrics, final Tracing tracing) {
+                                                      final MetricRegistry metrics, @Nullable final Tracing tracing) {
 
         final List<RedisURI> uris = nodes.stream()
                 .map(RedisURIFactory::build)

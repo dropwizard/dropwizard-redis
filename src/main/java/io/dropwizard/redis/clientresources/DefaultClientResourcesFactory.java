@@ -1,9 +1,10 @@
 package io.dropwizard.redis.clientresources;
 
+import brave.Tracing;
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.lettuce.core.resource.DefaultClientResources;
-import io.lettuce.core.tracing.Tracing;
+import io.lettuce.core.tracing.BraveTracing;
 import io.netty.util.concurrent.EventExecutorGroup;
 import reactor.core.scheduler.Schedulers;
 
@@ -26,7 +27,7 @@ public class DefaultClientResourcesFactory extends ClientResourcesFactory {
                 .reconnectDelay(delay.build());
 
         if (tracing != null) {
-            builder.tracing(tracing);
+            builder.tracing(BraveTracing.create(tracing));
         }
 
         // TODO: add netty customizer

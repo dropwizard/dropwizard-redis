@@ -1,5 +1,6 @@
 package io.dropwizard.redis.clientresources;
 
+import brave.Tracing;
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -18,13 +19,11 @@ import io.dropwizard.redis.netty.DefaultEventExecutorGroupFactory;
 import io.dropwizard.redis.netty.EventExecutorGroupFactory;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
-import io.lettuce.core.tracing.Tracing;
 
 import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class ClientResourcesFactory implements Discoverable {
