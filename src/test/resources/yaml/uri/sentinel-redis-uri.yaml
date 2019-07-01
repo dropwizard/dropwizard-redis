@@ -1,0 +1,7 @@
+type: sentinel
+timeout: 90s
+clientName: test
+password: hunter2
+sentinels:
+  - "127.0.0.1:6389"
+sentinelMasterId: abc

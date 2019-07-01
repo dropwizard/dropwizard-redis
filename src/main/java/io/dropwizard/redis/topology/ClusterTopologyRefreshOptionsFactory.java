@@ -32,6 +32,54 @@ public class ClusterTopologyRefreshOptionsFactory {
     @JsonProperty
     private int refreshTriggersReconnectAttempts = ClusterTopologyRefreshOptions.DEFAULT_REFRESH_TRIGGERS_RECONNECT_ATTEMPTS;
 
+    public boolean isPeriodicRefreshEnabled() {
+        return periodicRefreshEnabled;
+    }
+
+    public void setPeriodicRefreshEnabled(final boolean periodicRefreshEnabled) {
+        this.periodicRefreshEnabled = periodicRefreshEnabled;
+    }
+
+    public Duration getRefreshPeriod() {
+        return refreshPeriod;
+    }
+
+    public void setRefreshPeriod(final Duration refreshPeriod) {
+        this.refreshPeriod = refreshPeriod;
+    }
+
+    public boolean isCloseStaleConnections() {
+        return closeStaleConnections;
+    }
+
+    public void setCloseStaleConnections(final boolean closeStaleConnections) {
+        this.closeStaleConnections = closeStaleConnections;
+    }
+
+    public boolean isDynamicRefreshSources() {
+        return dynamicRefreshSources;
+    }
+
+    public void setDynamicRefreshSources(final boolean dynamicRefreshSources) {
+        this.dynamicRefreshSources = dynamicRefreshSources;
+    }
+
+    public Set<ClusterTopologyRefreshOptions.RefreshTrigger> getAdaptiveRefreshTriggers() {
+        return adaptiveRefreshTriggers;
+    }
+
+    public void setAdaptiveRefreshTriggers(final Set<ClusterTopologyRefreshOptions.RefreshTrigger> adaptiveRefreshTriggers) {
+        this.adaptiveRefreshTriggers = adaptiveRefreshTriggers;
+    }
+
+    public int getRefreshTriggersReconnectAttempts() {
+        return refreshTriggersReconnectAttempts;
+    }
+
+    public void setRefreshTriggersReconnectAttempts(final int refreshTriggersReconnectAttempts) {
+        this.refreshTriggersReconnectAttempts = refreshTriggersReconnectAttempts;
+    }
+
     public ClusterTopologyRefreshOptions build() {
         return ClusterTopologyRefreshOptions.builder()
                 .enablePeriodicRefresh(periodicRefreshEnabled)

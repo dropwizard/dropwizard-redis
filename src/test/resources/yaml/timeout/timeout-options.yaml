@@ -1,0 +1,3 @@
+timeoutCommands: true
+applyConnectionTimeout: true
+fixedTimeout: 6s

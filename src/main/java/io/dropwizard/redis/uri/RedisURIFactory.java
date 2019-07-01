@@ -1,56 +1,24 @@
 package io.dropwizard.redis.uri;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.net.HostAndPort;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.dropwizard.jackson.Discoverable;
 import io.dropwizard.util.Duration;
 import io.lettuce.core.RedisURI;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-public class RedisURIFactory {
-    @Valid
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+public abstract class RedisURIFactory implements Discoverable {
     @NotNull
     @JsonProperty
-    private HostAndPort node;
-
-    @NotNull
-    @JsonProperty
-    private Duration timeout = Duration.seconds(RedisURI.DEFAULT_TIMEOUT);
+    protected Duration timeout = Duration.seconds(RedisURI.DEFAULT_TIMEOUT);
 
     @JsonProperty
-    private String clientName;
+    protected String clientName;
 
     @JsonProperty
-    private String password;
-
-    @Valid
-    @NotNull
-    @JsonProperty
-    private Set<HostAndPort> sentinels = Collections.emptySet();
-
-    @JsonProperty
-    private String sentinelMasterId;
-
-    @JsonProperty
-    private boolean ssl = false;
-
-    @JsonProperty
-    private boolean startTls = false;
-
-    @JsonProperty
-    private boolean verifyPeer = true;
-
-    public HostAndPort getNode() {
-        return node;
-    }
-
-    public void setNode(final HostAndPort node) {
-        this.node = node;
-    }
+    protected String password;
 
     public Duration getTimeout() {
         return timeout;
@@ -76,69 +44,5 @@ public class RedisURIFactory {
         this.password = password;
     }
 
-    public Set<HostAndPort> getSentinels() {
-        return sentinels;
-    }
-
-    public void setSentinels(final Set<HostAndPort> sentinels) {
-        this.sentinels = sentinels;
-    }
-
-    public String getSentinelMasterId() {
-        return sentinelMasterId;
-    }
-
-    public void setSentinelMasterId(final String sentinelMasterId) {
-        this.sentinelMasterId = sentinelMasterId;
-    }
-
-    public boolean isSsl() {
-        return ssl;
-    }
-
-    public void setSsl(final boolean ssl) {
-        this.ssl = ssl;
-    }
-
-    public boolean isStartTls() {
-        return startTls;
-    }
-
-    public void setStartTls(final boolean startTls) {
-        this.startTls = startTls;
-    }
-
-    public boolean isVerifyPeer() {
-        return verifyPeer;
-    }
-
-    public void setVerifyPeer(final boolean verifyPeer) {
-        this.verifyPeer = verifyPeer;
-    }
-
-    public RedisURI build() {
-        final RedisURI.Builder builder = RedisURI.builder()
-                .withHost(node.getHost())
-                .withPort(node.getPort())
-                .withTimeout(java.time.Duration.ofSeconds(timeout.toSeconds()))
-                .withSsl(ssl)
-                .withStartTls(startTls)
-                .withVerifyPeer(verifyPeer);
-
-        if (clientName != null) {
-            builder.withClientName(clientName);
-        }
-
-        if (password != null) {
-            builder.withPassword(password);
-        }
-
-        sentinels.forEach(sentinel -> builder.withSentinel(sentinel.getHost(), sentinel.getPort()));
-
-        if (sentinelMasterId != null) {
-            builder.withSentinelMasterId(sentinelMasterId);
-        }
-
-        return builder.build();
-    }
+    public abstract RedisURI build();
 }
