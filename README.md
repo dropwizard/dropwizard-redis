@@ -49,7 +49,7 @@ In your Dropwizard `Configuration` class, configure a `RedisClusterClientFactory
 @Valid
 @NotNull
 @JsonProperty("redis-cluster")
-private RedisClusterClientFactory<String, String> redisClusterClientFactory;
+private RedisClusterClientFactory<String, String> redisClientFactory;
 ```
 
 Then, in your `Application` class, you'll want to do something similar to the following:
@@ -76,15 +76,15 @@ public void run(ExampleConfiguration config, Environment environment) {
 
 Configure your factory in your `config.yml` file:
 ```yaml
-type: cluster
-name: my-redis-use-case
-nodes: 
-  - node:
-      host: 127.0.0.1
-      port: 6379
-   clientName: person-app
-   password: hunter2
-   redisCodec:
-     type: string
+redis-cluster:
+  type: cluster
+  name: my-redis-use-case
+  nodes:
+    - type: redis
+      node: "127.0.0.1:6379"
+      clientName: person-app
+      password: hunter2
+  redisCodec:
+    type: string
   # TODO: add more configs than just the required basics
 ```

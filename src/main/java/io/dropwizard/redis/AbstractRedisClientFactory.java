@@ -18,12 +18,9 @@ import io.dropwizard.redis.metrics.event.visitor.ConnectionActivatedEventVisitor
 import io.dropwizard.redis.metrics.event.visitor.ConnectionDeactivatedEventVisitor;
 import io.dropwizard.redis.metrics.event.visitor.DisconnectedEventVisitor;
 import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
-import io.dropwizard.redis.uri.RedisURIFactory;
-import io.dropwizard.validation.MinSize;
 import io.lettuce.core.api.StatefulConnection;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -35,12 +32,6 @@ public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {
     @NotNull
     @JsonProperty
     protected String name;
-
-    @Valid
-    @NotNull
-    @MinSize(1)
-    @JsonProperty
-    protected List<RedisURIFactory> nodes = Collections.emptyList();
 
     @Valid
     @JsonProperty
@@ -62,14 +53,6 @@ public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {
 
     public void setName(final String name) {
         this.name = name;
-    }
-
-    public List<RedisURIFactory> getNodes() {
-        return nodes;
-    }
-
-    public void setNodes(final List<RedisURIFactory> nodes) {
-        this.nodes = nodes;
     }
 
     public ClusterTopologyRefreshOptions getClusterTopologyRefreshOptions() {

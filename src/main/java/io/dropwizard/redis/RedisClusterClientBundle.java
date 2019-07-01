@@ -12,7 +12,6 @@ import javax.annotation.Nullable;
 import static java.util.Objects.requireNonNull;
 
 public abstract class RedisClusterClientBundle<K, V, T extends Configuration> implements ConfiguredBundle<T> {
-
     @Nullable
     private StatefulRedisClusterConnection<K, V> clusterConnection;
 

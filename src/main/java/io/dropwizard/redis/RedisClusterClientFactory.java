@@ -18,7 +18,9 @@ import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.resource.ClientResources;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +31,11 @@ import javax.validation.constraints.NotNull;
 
 @JsonTypeName("cluster")
 public class RedisClusterClientFactory<K, V> extends AbstractRedisClientFactory<K, V> {
+    @Valid
+    @NotEmpty
+    @JsonProperty
+    private List<RedisURIFactory> nodes = Collections.emptyList();
+
     @Valid
     @NotNull
     @JsonProperty
@@ -51,7 +58,6 @@ public class RedisClusterClientFactory<K, V> extends AbstractRedisClientFactory<
     @Override
     public StatefulRedisClusterConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
                                                       final MetricRegistry metrics, @Nullable final Tracing tracing) {
-
         final List<RedisURI> uris = nodes.stream()
                 .map(RedisURIFactory::build)
                 .collect(Collectors.toList());
