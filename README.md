@@ -7,22 +7,20 @@ This bundle comes with out-of-the-box support for:
 * Client lifecycle management
 * Client health checks
 * Dropwizard Metrics integration
+* Brave distributed tracing instrumentation integration for the Lettuce client.
+* Support for the Lettuce cluster client.
+* Support for the Lettuce sentinel client
+* Support the the Lettuce basic Redis client 
 
 For more information on Redis, take a look at the official documentation here: https://redis.io/documentation
 
 For More information on the Redis client used (Lettuce), see: https://github.com/lettuce-io/lettuce-core
 
-## Future Improvements
-* Distributed tracing instrumentation integration for the Lettuce client.
-* Support for the Lettuce cluster client.
-* Support for the Lettuce sentinel client
-* Support the the Lettuce basic Redis client 
-
 ## Usage
 Add dependency on library.
 
 Maven:
-```
+```xml
 <dependency>
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
@@ -31,17 +29,10 @@ Maven:
 ```
 
 Gradle:
-```
+```groovy
 compile "io.dropwizard.modules:dropwizard-redis:1.3.12-1"
 ```
 
-In your Dropwizard configuration class, configure a `RedisClusterClientFactory`
-```
-@Valid
-@NotNull
-@JsonProperty
-private RedisClusterClientFactory redis;
-```
 
 ### Basic Lettuce Client
 In your Dropwizard `Configuration` class, configure a `RedisClientFactory`:
@@ -142,22 +133,4 @@ redis-cluster:
       type: default
       enabled: false
   # TODO: add more configs than just the required basics
-```
-
-
-```yaml
-redis:
-  type: basic
-  name: my-redis-use-case
-  node:
-    type: redis
-    node: "127.0.0.1:6379"
-    clientName: person-app
-  redisCodec:
-    type: string
-  clientResources:
-    type: default
-    commandLatencyCollector:
-      type: default
-      enabled: false
 ```

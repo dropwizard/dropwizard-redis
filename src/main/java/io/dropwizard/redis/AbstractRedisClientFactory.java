@@ -87,7 +87,7 @@ public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {
     public abstract StatefulConnection<K, V> build(final HealthCheckRegistry healthChecks, final LifecycleEnvironment lifecycle,
                                                    final MetricRegistry metrics, @Nullable final Tracing tracing);
 
-    List<EventVisitor> buildEventVisitors(final MetricRegistry metrics) {
+    protected List<EventVisitor> buildEventVisitors(final MetricRegistry metrics) {
         // Extract this, and the event wrapper builders, to Dropwizard factories, if more event types are added frequently enough?
         return ImmutableList.of(
                 new ClusterTopologyChangedEventVisitor(name, metrics),
