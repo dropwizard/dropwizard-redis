@@ -1,0 +1,4 @@
+type: decorrelated-jitter
+base: 1
+lowerBound: 1s
+upperBound: 5s

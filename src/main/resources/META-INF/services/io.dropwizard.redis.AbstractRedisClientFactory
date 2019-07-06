@@ -1,0 +1,2 @@
+io.dropwizard.redis.RedisClientFactory
+io.dropwizard.redis.RedisClusterClientFactory

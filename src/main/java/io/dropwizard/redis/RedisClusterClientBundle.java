@@ -1,18 +1,19 @@
 package io.dropwizard.redis;
 
+import brave.Tracing;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import redis.clients.jedis.commands.JedisClusterCommands;
+import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 
 import javax.annotation.Nullable;
 
 import static java.util.Objects.requireNonNull;
 
-public abstract class RedisClusterClientBundle<T extends Configuration> implements ConfiguredBundle<T> {
+public abstract class RedisClusterClientBundle<K, V, T extends Configuration> implements ConfiguredBundle<T> {
     @Nullable
-    private JedisClusterCommands clusterClient;
+    private StatefulRedisClusterConnection<K, V> clusterConnection;
 
     @Override
     public void initialize(final Bootstrap<?> bootstrap) {
@@ -21,14 +22,17 @@ public abstract class RedisClusterClientBundle<T extends Configuration> implemen
 
     @Override
     public void run(final T configuration, final Environment environment) throws Exception {
-        final RedisClusterClientFactory redisClusterClientFactory = requireNonNull(getRedisClusterClientFactory(configuration));
+        final RedisClusterClientFactory<K, V> redisClusterClientFactory = requireNonNull(getRedisClusterClientFactory(configuration));
 
-        this.clusterClient = redisClusterClientFactory.build(environment.metrics(), environment.healthChecks(), environment.lifecycle());
+        final Tracing tracing = Tracing.current();
+
+        this.clusterConnection = redisClusterClientFactory.build(environment.healthChecks(), environment.lifecycle(), environment.metrics(),
+                tracing);
     }
 
-    public abstract RedisClusterClientFactory getRedisClusterClientFactory(T configuration);
+    public abstract RedisClusterClientFactory<K, V> getRedisClusterClientFactory(T configuration);
 
-    public JedisClusterCommands getClusterClient() {
-        return requireNonNull(clusterClient);
+    public StatefulRedisClusterConnection<K, V> getClusterConnection() {
+        return requireNonNull(clusterConnection);
     }
 }

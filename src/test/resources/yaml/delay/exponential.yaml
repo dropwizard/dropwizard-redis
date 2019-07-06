@@ -1,0 +1,4 @@
+type: exponential
+powersOf: 3
+lowerBound: 1s
+upperBound: 5s

@@ -1,3 +1,10 @@
-io.dropwizard.redis.security.hostnameverifier.HostnameVerifierFactory
-io.dropwizard.redis.security.socket.SSLSocketFactoryFactory
-io.dropwizard.redis.RedisClusterClientFactory
+io.dropwizard.redis.AbstractRedisClientFactory
+io.dropwizard.redis.clientresources.ClientResourcesFactory
+io.dropwizard.redis.codec.RedisCodecFactory
+io.dropwizard.redis.delay.DelayFactory
+io.dropwizard.redis.event.EventBusFactory
+io.dropwizard.redis.event.EventLoopGroupProviderFactory
+io.dropwizard.redis.metrics.CommandLatencyCollectorFactory
+io.dropwizard.redis.metrics.EventPublisherOptionsFactory
+io.dropwizard.redis.netty.EventExecutorGroupFactory
+io.dropwizard.redis.uri.RedisURIFactory

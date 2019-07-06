@@ -1,0 +1,4 @@
+io.dropwizard.redis.codec.ByteArrayCodecFactory
+io.dropwizard.redis.codec.CompressionCodecFactory
+io.dropwizard.redis.codec.StringCodecFactory
+io.dropwizard.redis.codec.Utf8StringCodecFactory

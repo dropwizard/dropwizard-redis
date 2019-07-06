@@ -1,0 +1,7 @@
+periodicRefreshEnabled: true
+refreshPeriod: 2m
+closeStaleConnections: false
+dynamicRefreshSources: false
+adaptiveRefreshTriggers:
+  - PERSISTENT_RECONNECTS
+refreshTriggersReconnectAttempts: 3

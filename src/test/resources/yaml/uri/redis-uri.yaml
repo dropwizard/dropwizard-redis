@@ -1,0 +1,8 @@
+type: redis
+node: "127.0.0.1:6379"
+timeout: 90s
+clientName: test
+password: hunter2
+ssl: true
+startTls: true
+verifyPeer: true
