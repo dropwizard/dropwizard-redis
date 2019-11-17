@@ -1,6 +1,5 @@
 package io.dropwizard.redis.metrics.event;
 
-import com.codahale.metrics.MetricRegistry;
 import com.google.common.collect.ImmutableList;
 import io.dropwizard.redis.metrics.event.visitor.*;
 import io.lettuce.core.cluster.event.ClusterTopologyChangedEvent;
@@ -10,16 +9,12 @@ import io.lettuce.core.event.connection.ConnectionDeactivatedEvent;
 import io.lettuce.core.event.connection.DisconnectedEvent;
 import io.lettuce.core.event.metrics.CommandLatencyEvent;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
 public class LettuceMetricsSubscriberTest {
-    @Mock
-    private MetricRegistry metrics = mock(MetricRegistry.class);
-
     @Test
     public void shouldDispatchEventsToListeners() {
         List<EventVisitor> visitors = ImmutableList.of(
