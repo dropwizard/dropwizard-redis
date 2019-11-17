@@ -1,11 +1,11 @@
 package io.dropwizard.redis.metrics.event.wrapper;
 
-import io.dropwizard.redis.metrics.event.visitor.DisconnectedEventVisitor;
+import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
 import io.lettuce.core.event.connection.DisconnectedEvent;
 
 import static java.util.Objects.requireNonNull;
 
-public class VisitableDisconnectedEventWrapper implements VisitableEventWrapper<DisconnectedEventVisitor> {
+public class VisitableDisconnectedEventWrapper implements VisitableEventWrapper {
     private final DisconnectedEvent event;
 
     public VisitableDisconnectedEventWrapper(final DisconnectedEvent event) {
@@ -13,7 +13,7 @@ public class VisitableDisconnectedEventWrapper implements VisitableEventWrapper<
     }
 
     @Override
-    public void accept(final DisconnectedEventVisitor visitor) {
+    public void accept(final EventVisitor visitor) {
         visitor.visit(event);
     }
 }
