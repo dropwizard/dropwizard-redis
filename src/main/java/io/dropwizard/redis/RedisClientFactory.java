@@ -9,18 +9,13 @@ import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.redis.clientoptions.ClientOptionsFactory;
 import io.dropwizard.redis.health.RedisHealthCheck;
 import io.dropwizard.redis.managed.RedisClientManager;
-import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
-import io.dropwizard.redis.metrics.event.wrapper.EventWrapperFactory;
-import io.dropwizard.redis.metrics.event.wrapper.VisitableEventWrapper;
+import io.dropwizard.redis.metrics.event.LettuceMetricsSubscriber;
 import io.dropwizard.redis.uri.RedisURIFactory;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.resource.ClientResources;
-
-import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -65,14 +60,10 @@ public class RedisClientFactory<K, V> extends AbstractRedisClientFactory<K, V> {
         healthChecks.register(name, new RedisHealthCheck(() -> connection.sync().ping()));
 
         // metrics (latency and other connection events) integration
-        final List<EventVisitor> eventVisitors = buildEventVisitors(metrics);
         redisClient.getResources()
                 .eventBus()
                 .get()
-                .subscribe(event -> {
-                    final Optional<VisitableEventWrapper> eventWrapperOpt = EventWrapperFactory.build(event);
-                    eventWrapperOpt.ifPresent(eventWrapper -> eventVisitors.forEach(eventWrapper::accept));
-                });
+                .subscribe(new LettuceMetricsSubscriber(buildEventVisitors(metrics)));
 
         return connection;
     }
