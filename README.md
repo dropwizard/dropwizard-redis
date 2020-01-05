@@ -21,6 +21,8 @@ dropwizard-redis        | Dropwizard v1.3.x  | Dropwizard v2.0.x
 ----------------------- | ------------------ | ------------------
 v1.3.x                  | :white_check_mark: | :white_check_mark:
 v1.4.x                  | :white_check_mark: | :white_check_mark:
+v1.5.x                  | :white_check_mark: | :white_check_mark:
+
 
 ## Usage
 Add dependency on library.
@@ -30,7 +32,7 @@ Maven:
 <dependency>
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>1.4.0</version>
+  <version>1.5.0</version>
 </dependency>
 ```
 
