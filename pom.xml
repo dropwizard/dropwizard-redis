@@ -8,7 +8,7 @@
 
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>1.5.0</version>
+  <version>1.5.1-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
@@ -46,7 +46,7 @@
     <developerConnection>scm:git:git@github.com:dropwizard/dropwizard-redis.git</developerConnection>
     <connection>scm:git:https://github.com/dropwizard/dropwizard-redis.git</connection>
     <url>https://github.com/dropwizard/dropwizard-redis</url>
-    <tag>dropwizard-redis-1.5.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <ciManagement>
