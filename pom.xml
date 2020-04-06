@@ -87,7 +87,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <brave.version>5.11.0</brave.version>
-    <dropwizard.version>2.0.5</dropwizard.version>
+    <dropwizard.version>2.0.6</dropwizard.version>
     <lettuce.version>5.2.2.RELEASE</lettuce.version>
     <redis-mock.version>0.1.16</redis-mock.version>
   </properties>
