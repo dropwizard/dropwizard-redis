@@ -9,25 +9,6 @@
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
   <version>1.5.2-SNAPSHOT</version>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>8</source>
-          <target>8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-    <extensions>
-      <extension>
-        <groupId>kr.motd.maven</groupId>
-        <artifactId>os-maven-plugin</artifactId>
-        <version>1.6.2</version>
-      </extension>
-    </extensions>
-  </build>
   <packaging>jar</packaging>
 
   <name>Dropwizard Redis</name>
@@ -85,6 +66,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <sonar.projectKey>dropwizard_dropwizard-redis</sonar.projectKey>
+    <sonar.organization>dropwizard</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
     <brave.version>5.13.2</brave.version>
     <dropwizard.version>2.0.17</dropwizard.version>
@@ -148,6 +133,58 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.7.0.1746</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.6</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.6.2</version>
+      </extension>
+    </extensions>
+  </build>
 
   <profiles>
     <profile>
