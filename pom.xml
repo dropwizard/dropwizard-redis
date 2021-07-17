@@ -31,8 +31,8 @@
   </scm>
 
   <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/dropwizard/dropwizard-redis</url>
+    <system>GitHub Actions</system>
+    <url>https://github.com/dropwizard/dropwizard-redis/actions</url>
   </ciManagement>
 
   <issueManagement>
