@@ -1,5 +1,6 @@
 package io.dropwizard.redis.metrics;
 
+import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
 import io.dropwizard.configuration.YamlConfigurationFactory;
@@ -20,13 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DefaultCommandLatencyCollectorFactoryTest {
     private final ObjectMapper objectMapper = Jackson.newObjectMapper();
     private final Validator validator = Validators.newValidator();
-    private final YamlConfigurationFactory<CommandLatencyCollectorFactory> configFactory =
-            new YamlConfigurationFactory<>(CommandLatencyCollectorFactory.class, validator, objectMapper, "dw");
+    private final YamlConfigurationFactory<CommandLatencyRecorderFactory> configFactory =
+            new YamlConfigurationFactory<>(CommandLatencyRecorderFactory.class, validator, objectMapper, "dw");
 
     @Test
     public void shouldBuildDefaultCommandLatencyCollector() throws Exception {
         final File yml = new File(Resources.getResource("yaml/metrics/default-command-latency-collector.yaml").toURI());
-        final CommandLatencyCollectorFactory factory = configFactory.build(yml);
+        final CommandLatencyRecorderFactory factory = configFactory.build(yml);
         assertThat(factory)
                 .isInstanceOf(DefaultCommandLatencyCollectorFactory.class);
 
@@ -42,7 +43,7 @@ public class DefaultCommandLatencyCollectorFactoryTest {
         assertThat(defaultCommandLatencyCollectorFactory.isResetLatenciesAfterEvent())
                 .isTrue();
 
-        assertThat(defaultCommandLatencyCollectorFactory.build())
+        assertThat(defaultCommandLatencyCollectorFactory.build(new MetricRegistry()))
                 .isInstanceOf(DefaultCommandLatencyCollector.class);
     }
 

@@ -32,7 +32,7 @@ public class DefaultClientResourcesFactoryTest {
                 .isInstanceOf(DefaultClientResourcesFactory.class);
 
         final DefaultClientResourcesFactory defaultClientResourcesFactory = (DefaultClientResourcesFactory) factory;
-        assertThat(defaultClientResourcesFactory.getCommandLatencyCollector())
+        assertThat(defaultClientResourcesFactory.getCommandLatencyRecorder())
                 .isNotNull();
         assertThat(defaultClientResourcesFactory.getEventPublisherOptions())
                 .isNotNull();

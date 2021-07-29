@@ -4,7 +4,7 @@ io.dropwizard.redis.codec.RedisCodecFactory
 io.dropwizard.redis.delay.DelayFactory
 io.dropwizard.redis.event.EventBusFactory
 io.dropwizard.redis.event.EventLoopGroupProviderFactory
-io.dropwizard.redis.metrics.CommandLatencyCollectorFactory
+io.dropwizard.redis.metrics.CommandLatencyRecorderFactory
 io.dropwizard.redis.metrics.EventPublisherOptionsFactory
 io.dropwizard.redis.netty.EventExecutorGroupFactory
 io.dropwizard.redis.uri.RedisURIFactory

@@ -9,6 +9,7 @@ import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.redis.clientoptions.ClusterClientOptionsFactory;
 import io.dropwizard.redis.health.RedisHealthCheck;
 import io.dropwizard.redis.managed.RedisClientManager;
+import io.dropwizard.redis.metrics.event.LettuceMetricsSubscriber;
 import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
 import io.dropwizard.redis.metrics.event.wrapper.EventWrapperFactory;
 import io.dropwizard.redis.metrics.event.wrapper.VisitableEventWrapper;
@@ -83,10 +84,7 @@ public class RedisClusterClientFactory<K, V> extends AbstractRedisClientFactory<
         redisClusterClient.getResources()
                 .eventBus()
                 .get()
-                .subscribe(event -> {
-                    final Optional<VisitableEventWrapper> eventWrapperOpt = EventWrapperFactory.build(event);
-                    eventWrapperOpt.ifPresent(eventWrapper -> eventVisitors.forEach(eventWrapper::accept));
-                });
+                .subscribe(new LettuceMetricsSubscriber(buildEventVisitors(metrics)));
 
         return connection;
     }

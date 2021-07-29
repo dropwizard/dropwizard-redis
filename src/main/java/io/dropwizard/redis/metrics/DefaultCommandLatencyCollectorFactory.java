@@ -1,11 +1,10 @@
 package io.dropwizard.redis.metrics;
 
+import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import io.dropwizard.validation.MinSize;
 import io.lettuce.core.metrics.DefaultCommandLatencyCollector;
 import io.lettuce.core.metrics.DefaultCommandLatencyCollectorOptions;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @JsonTypeName("default")
-public class DefaultCommandLatencyCollectorFactory implements CommandLatencyCollectorFactory {
+public class DefaultCommandLatencyCollectorFactory implements CommandLatencyRecorderFactory {
     @NotNull
     @JsonProperty
     private TimeUnit targetUnit = DefaultCommandLatencyCollectorOptions.DEFAULT_TARGET_UNIT;
@@ -73,7 +72,7 @@ public class DefaultCommandLatencyCollectorFactory implements CommandLatencyColl
     }
 
     @Override
-    public DefaultCommandLatencyCollector build() {
+    public DefaultCommandLatencyCollector build(MetricRegistry metricRegistry) {
         final DefaultCommandLatencyCollectorOptions.Builder builder = DefaultCommandLatencyCollectorOptions.builder()
                 .targetUnit(targetUnit)
                 .targetPercentiles(targetPercentiles)

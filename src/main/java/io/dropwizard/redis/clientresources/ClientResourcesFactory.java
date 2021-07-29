@@ -11,7 +11,7 @@ import io.dropwizard.redis.event.DefaultEventBusFactory;
 import io.dropwizard.redis.event.DefaultEventLoopGroupProviderFactory;
 import io.dropwizard.redis.event.EventBusFactory;
 import io.dropwizard.redis.event.EventLoopGroupProviderFactory;
-import io.dropwizard.redis.metrics.CommandLatencyCollectorFactory;
+import io.dropwizard.redis.metrics.CommandLatencyRecorderFactory;
 import io.dropwizard.redis.metrics.DefaultCommandLatencyCollectorFactory;
 import io.dropwizard.redis.metrics.DefaultEventPublisherOptionsFactory;
 import io.dropwizard.redis.metrics.EventPublisherOptionsFactory;
@@ -30,7 +30,7 @@ public abstract class ClientResourcesFactory implements Discoverable {
     @Valid
     @NotNull
     @JsonProperty
-    protected CommandLatencyCollectorFactory commandLatencyCollector = new DefaultCommandLatencyCollectorFactory();
+    protected CommandLatencyRecorderFactory commandLatencyRecorder = new DefaultCommandLatencyCollectorFactory();
 
     @Valid
     @NotNull
@@ -64,12 +64,12 @@ public abstract class ClientResourcesFactory implements Discoverable {
     @NotNull
     protected DelayFactory delay = new ExponentialDelayFactory();
 
-    public CommandLatencyCollectorFactory getCommandLatencyCollector() {
-        return commandLatencyCollector;
+    public CommandLatencyRecorderFactory getCommandLatencyRecorder() {
+        return commandLatencyRecorder;
     }
 
-    public void setCommandLatencyCollector(final CommandLatencyCollectorFactory commandLatencyCollector) {
-        this.commandLatencyCollector = commandLatencyCollector;
+    public void setCommandLatencyRecorder(final CommandLatencyRecorderFactory commandLatencyRecorder) {
+        this.commandLatencyRecorder = commandLatencyRecorder;
     }
 
     public EventPublisherOptionsFactory getEventPublisherOptions() {

@@ -10,7 +10,7 @@ This bundle comes with out-of-the-box support for:
 * Brave distributed tracing instrumentation integration for the Lettuce client.
 * Support for the Lettuce cluster client.
 * Support for the Lettuce sentinel client
-* Support the the Lettuce basic Redis client 
+* Support the the Lettuce basic Redis client
 
 For more information on Redis, take a look at the official documentation here: https://redis.io/documentation
 
@@ -86,7 +86,7 @@ redis:
     type: string
   clientResources:
     type: default
-    commandLatencyCollector:
+    commandLatencyRecorder:
       type: default
       enabled: false
 ```
@@ -137,7 +137,7 @@ redis-cluster:
     type: string
   clientResources:
     type: default
-    commandLatencyCollector:
+    commandLatencyRecorder:
       type: default
       enabled: false
   # TODO: add more configs than just the required basics
