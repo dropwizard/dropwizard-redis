@@ -13,7 +13,8 @@ import java.util.concurrent.ThreadFactory;
 public class DefaultEventExecutorGroupFactory implements EventExecutorGroupFactory {
     @Override
     public EventExecutorGroup build(final int threadPoolSize, final String name, final MetricRegistry metrics) {
-        final ThreadFactory threadFactory = new DefaultThreadFactory(String.format("%s-eventExecutorLoop", name), true);
-        return new DefaultEventExecutorGroup(threadPoolSize, new InstrumentedThreadFactory(threadFactory, metrics));
+        String poolName = String.format("%s-eventExecutorLoop", name);
+        final ThreadFactory threadFactory = new DefaultThreadFactory(poolName, true);
+        return new DefaultEventExecutorGroup(threadPoolSize, new InstrumentedThreadFactory(threadFactory, metrics, poolName));
     }
 }
