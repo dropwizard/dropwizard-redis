@@ -69,11 +69,13 @@ public class RedisModeURIFactory extends RedisURIFactory {
         if (clientName != null) {
             builder.withClientName(clientName);
         }
-
-        if (password != null) {
+        
+        if(username != null && password != null) {
+        	builder.withAuthentication(username, password);
+        } else if (password != null) {
             builder.withPassword(password);
         }
-
+        
         return builder.build();
     }
 }

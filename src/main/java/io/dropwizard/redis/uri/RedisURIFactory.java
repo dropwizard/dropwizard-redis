@@ -18,6 +18,9 @@ public abstract class RedisURIFactory implements Discoverable {
     protected String clientName;
 
     @JsonProperty
+    protected String username;
+    
+    @JsonProperty
     protected String password;
 
     public Duration getTimeout() {
@@ -36,6 +39,14 @@ public abstract class RedisURIFactory implements Discoverable {
         this.clientName = clientName;
     }
 
+    public String getUsername() {
+		return username;
+	}
+    
+    public void setUsername(String username) {
+		this.username = username;
+	}
+    
     public String getPassword() {
         return password;
     }
