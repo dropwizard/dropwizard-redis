@@ -1,0 +1,2 @@
+io.dropwizard.redis.metrics.DefaultCommandLatencyCollectorFactory
+io.dropwizard.redis.metrics.DropwizardCommandLatencyRecorderFactory

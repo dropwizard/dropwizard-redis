@@ -18,7 +18,7 @@ public class DefaultClientResourcesFactory extends ClientResourcesFactory {
         final EventExecutorGroup executorGroup = eventExecutorGroup.build(computationThreads, name, metrics);
 
         final ClientResources.Builder builder = DefaultClientResources.builder()
-                .commandLatencyCollector(commandLatencyCollector.build())
+                .commandLatencyRecorder(commandLatencyRecorder.build(metrics))
                 .commandLatencyPublisherOptions(eventPublisherOptions.build())
                 .eventExecutorGroup(executorGroup)
                 .eventBus(eventBusFactory.build(Schedulers.fromExecutor(executorGroup)))
