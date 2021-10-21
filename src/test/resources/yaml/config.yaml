@@ -9,7 +9,7 @@ redis:
     type: string
   clientResources:
     type: default
-    commandLatencyCollector:
+    commandLatencyRecorder:
       type: default
       enabled: false
 
