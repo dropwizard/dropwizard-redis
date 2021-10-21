@@ -6,10 +6,9 @@ import com.google.common.net.HostAndPort;
 import io.lettuce.core.RedisURI;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Set;
-
-import javax.validation.Valid;
 
 @JsonTypeName("sentinel")
 public class SentinelModeURIFactory extends RedisURIFactory {
@@ -48,7 +47,9 @@ public class SentinelModeURIFactory extends RedisURIFactory {
             builder.withClientName(clientName);
         }
 
-        if (password != null) {
+        if (username != null && password != null) {
+            builder.withAuthentication(username, password);
+        } else if (password != null) {
             builder.withPassword(password);
         }
 
