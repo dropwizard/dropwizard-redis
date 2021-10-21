@@ -5,7 +5,7 @@
 
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>1.5.3-SNAPSHOT</version>
+  <version>1.6.0</version>
   <packaging>jar</packaging>
 
   <name>Dropwizard Redis</name>
@@ -24,7 +24,7 @@
     <developerConnection>scm:git:git@github.com:dropwizard/dropwizard-redis.git</developerConnection>
     <connection>scm:git:https://github.com/dropwizard/dropwizard-redis.git</connection>
     <url>https://github.com/dropwizard/dropwizard-redis</url>
-    <tag>HEAD</tag>
+    <tag>dropwizard-redis-1.6.0</tag>
   </scm>
 
   <ciManagement>
