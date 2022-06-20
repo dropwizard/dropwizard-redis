@@ -71,7 +71,7 @@
     <brave.version>5.13.9</brave.version>
     <dropwizard.version>2.1.0</dropwizard.version>
     <lettuce.version>6.1.8.RELEASE</lettuce.version>
-    <redis-mock.version>1.0.2</redis-mock.version>
+    <redis-mock.version>1.0.3</redis-mock.version>
   </properties>
 
   <dependencyManagement>
