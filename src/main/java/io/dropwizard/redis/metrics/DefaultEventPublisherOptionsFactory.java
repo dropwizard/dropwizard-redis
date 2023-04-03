@@ -6,7 +6,7 @@ import io.dropwizard.util.Duration;
 import io.lettuce.core.event.DefaultEventPublisherOptions;
 import io.lettuce.core.event.EventPublisherOptions;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeName("default")
 public class DefaultEventPublisherOptionsFactory implements EventPublisherOptionsFactory {

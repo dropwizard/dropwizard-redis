@@ -7,7 +7,7 @@ import io.lettuce.core.resource.Delay;
 
 import java.util.function.Supplier;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeName("constant")
 public class ConstantDelayFactory implements DelayFactory {

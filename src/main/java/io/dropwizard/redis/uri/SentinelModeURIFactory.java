@@ -6,7 +6,7 @@ import com.google.common.net.HostAndPort;
 import io.lettuce.core.RedisURI;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Collections;
 import java.util.Set;
 

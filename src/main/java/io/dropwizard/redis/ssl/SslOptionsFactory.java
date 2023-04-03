@@ -6,7 +6,7 @@ import io.netty.handler.ssl.SslProvider;
 
 import java.io.File;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class SslOptionsFactory {
     @JsonProperty

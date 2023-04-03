@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.lettuce.core.codec.CompressionCodec;
 import io.lettuce.core.codec.RedisCodec;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeName("compression")
 public class CompressionCodecFactory<K, V> implements RedisCodecFactory<K, V> {

@@ -20,8 +20,8 @@ import io.lettuce.core.resource.ClientResources;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

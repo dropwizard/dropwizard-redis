@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.net.HostAndPort;
 import io.lettuce.core.RedisURI;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeName("redis")
 public class RedisModeURIFactory extends RedisURIFactory {
