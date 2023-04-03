@@ -8,8 +8,8 @@ import io.lettuce.core.resource.Delay;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeName("exponential")
 public class ExponentialDelayFactory implements DelayFactory {

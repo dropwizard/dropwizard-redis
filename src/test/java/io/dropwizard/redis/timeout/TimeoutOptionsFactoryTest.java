@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

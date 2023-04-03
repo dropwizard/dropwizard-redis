@@ -6,7 +6,7 @@ import io.dropwizard.jackson.Discoverable;
 import io.dropwizard.util.Duration;
 import io.lettuce.core.RedisURI;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class RedisURIFactory implements Discoverable {

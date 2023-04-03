@@ -24,8 +24,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {

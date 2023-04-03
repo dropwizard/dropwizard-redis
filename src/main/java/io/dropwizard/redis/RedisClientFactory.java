@@ -17,8 +17,8 @@ import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.resource.ClientResources;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @JsonTypeName("basic")
 public class RedisClientFactory<K, V> extends AbstractRedisClientFactory<K, V> {

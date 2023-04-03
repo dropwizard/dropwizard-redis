@@ -5,8 +5,8 @@ import io.dropwizard.redis.topology.ClusterTopologyRefreshOptionsFactory;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 
 public class ClusterClientOptionsFactory extends ClientOptionsFactory {
     @JsonProperty

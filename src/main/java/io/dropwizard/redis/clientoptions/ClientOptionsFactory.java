@@ -6,9 +6,9 @@ import io.dropwizard.redis.ssl.SslOptionsFactory;
 import io.dropwizard.redis.timeout.TimeoutOptionsFactory;
 import io.lettuce.core.ClientOptions;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 public class ClientOptionsFactory {
     @JsonProperty
