@@ -7,7 +7,7 @@ import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.util.Duration;
 import io.lettuce.core.SocketOptions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 

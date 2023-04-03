@@ -8,7 +8,7 @@ import io.lettuce.core.event.connection.ConnectionActivatedEvent;
 import io.lettuce.core.event.connection.ConnectionDeactivatedEvent;
 import io.lettuce.core.event.connection.DisconnectedEvent;
 import io.lettuce.core.event.metrics.CommandLatencyEvent;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 

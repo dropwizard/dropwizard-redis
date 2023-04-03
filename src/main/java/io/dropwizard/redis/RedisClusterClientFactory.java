@@ -11,24 +11,20 @@ import io.dropwizard.redis.health.RedisHealthCheck;
 import io.dropwizard.redis.managed.RedisClientManager;
 import io.dropwizard.redis.metrics.event.LettuceMetricsSubscriber;
 import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
-import io.dropwizard.redis.metrics.event.wrapper.EventWrapperFactory;
-import io.dropwizard.redis.metrics.event.wrapper.VisitableEventWrapper;
 import io.dropwizard.redis.uri.RedisURIFactory;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.resource.ClientResources;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @JsonTypeName("cluster")
 public class RedisClusterClientFactory<K, V> extends AbstractRedisClientFactory<K, V> {

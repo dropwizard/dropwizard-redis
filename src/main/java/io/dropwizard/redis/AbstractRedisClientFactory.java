@@ -20,10 +20,10 @@ import io.dropwizard.redis.metrics.event.visitor.DisconnectedEventVisitor;
 import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
 import io.lettuce.core.api.StatefulConnection;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 

@@ -17,12 +17,16 @@ For more information on Redis, take a look at the official documentation here: h
 For More information on the Redis client used (Lettuce), see: https://github.com/lettuce-io/lettuce-core
 
 ## Dropwizard Version Support Matrix
-dropwizard-redis        | Dropwizard v1.3.x  | Dropwizard v2.0.x
------------------------ | ------------------ | ------------------
-v1.3.x                  | :white_check_mark: | :white_check_mark:
-v1.4.x                  | :white_check_mark: | :white_check_mark:
-v1.5.x                  | :white_check_mark: | :white_check_mark:
-
+| dropwizard-redis | Dropwizard v1.3.x  | Dropwizard v2.0.x  | Dropwizard v2.1.x  | Dropwizard v3.0.x  | Dropwizard v4.0.x  |
+|------------------|--------------------|--------------------|--------------------|--------------------|--------------------|
+| v1.3.x           | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
+| v1.4.x           | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
+| v1.5.x           | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
+| v1.6.x           | :white_check_mark: | :white_check_mark: | :x:                | :x:                | :x:                |
+| v1.7.x           | :white_check_mark: | :white_check_mark: | :question:         | :x:                | :x:                |
+| v1.8.x           | :x:                | :question:         | :white_check_mark: | :x:                | :x:                |
+| v3.0.x           | :x:                | :x:                | :x:                | :white_check_mark: | :x:                |
+| v4.0.x           | :x:                | :x:                | :x:                | :x:                | :white_check_mark: |
 
 ## Usage
 Add dependency on library.
@@ -32,13 +36,13 @@ Maven:
 <dependency>
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>1.5.1</version>
+  <version>$latest-version</version>
 </dependency>
 ```
 
 Gradle:
 ```groovy
-compile "io.dropwizard.modules:dropwizard-redis:1.5.1"
+compile "io.dropwizard.modules:dropwizard-redis:$latest-version"
 ```
 
 
