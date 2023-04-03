@@ -1,10 +1,10 @@
 package io.dropwizard.redis.test;
 
-import io.dropwizard.Application;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.redis.RedisClientBundle;
 import io.dropwizard.redis.RedisClientFactory;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
 import io.lettuce.core.api.StatefulRedisConnection;
 
 public class TestApplication extends Application<TestConfiguration> {

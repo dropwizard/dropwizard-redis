@@ -10,7 +10,7 @@ import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.redis.delay.ConstantDelayFactory;
 import io.dropwizard.util.Duration;
 import io.lettuce.core.RedisURI;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 

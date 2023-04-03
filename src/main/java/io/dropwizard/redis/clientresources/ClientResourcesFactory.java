@@ -19,8 +19,8 @@ import io.dropwizard.redis.netty.DefaultEventExecutorGroupFactory;
 import io.dropwizard.redis.netty.EventExecutorGroupFactory;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

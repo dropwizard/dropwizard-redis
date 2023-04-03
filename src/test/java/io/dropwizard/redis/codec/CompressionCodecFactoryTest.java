@@ -8,7 +8,7 @@ import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jersey.validation.Validators;
 import io.lettuce.core.codec.CompressionCodec;
 import io.lettuce.core.codec.RedisCodec;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 

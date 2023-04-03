@@ -3,13 +3,10 @@ package io.dropwizard.redis.test;
 import com.github.fppt.jedismock.RedisServer;
 import io.dropwizard.testing.ConfigOverride;
 import io.dropwizard.testing.DropwizardTestSupport;
-import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.lettuce.core.api.StatefulRedisConnection;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.io.IOException;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +19,7 @@ public class RedisClusterBundleIT {
 
     private static RedisServer REDIS;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         REDIS = RedisServer.newRedisServer();  // bind to a random port
         REDIS.start();
@@ -32,7 +29,7 @@ public class RedisClusterBundleIT {
         APP_RULE.before();
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
         APP_RULE.after();
         REDIS.stop();

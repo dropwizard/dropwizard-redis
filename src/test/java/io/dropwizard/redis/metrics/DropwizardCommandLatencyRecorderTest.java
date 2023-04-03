@@ -5,7 +5,7 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import io.lettuce.core.protocol.CommandType;
 import io.netty.channel.local.LocalAddress;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.SocketAddress;
 import java.util.Map;

@@ -10,7 +10,7 @@ import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.redis.delay.ExponentialDelayFactory;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 

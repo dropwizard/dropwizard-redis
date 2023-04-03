@@ -6,7 +6,7 @@ import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jersey.validation.Validators;
 import io.lettuce.core.ClientOptions;
 import io.lettuce.core.cluster.ClusterClientOptions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.Validator;
 

@@ -2,8 +2,8 @@ package io.dropwizard.redis.managed;
 
 import io.lettuce.core.AbstractRedisClient;
 import io.lettuce.core.api.StatefulConnection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -17,7 +17,7 @@ public class RedisClientManagerTest {
 
     private final RedisClientManager redisClientManager = new RedisClientManager(client, connection, NAME);
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         reset(client, connection);
     }

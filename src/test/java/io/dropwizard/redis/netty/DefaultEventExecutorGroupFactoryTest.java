@@ -8,7 +8,7 @@ import io.dropwizard.jackson.DiscoverableSubtypeResolver;
 import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jersey.validation.Validators;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
