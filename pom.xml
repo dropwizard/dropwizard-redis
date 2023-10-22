@@ -69,7 +69,7 @@
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
     <brave.version>5.16.0</brave.version>
-    <dropwizard.version>2.1.8</dropwizard.version>
+    <dropwizard.version>2.1.9</dropwizard.version>
     <lettuce.version>6.2.6.RELEASE</lettuce.version>
     <redis-mock.version>1.0.10</redis-mock.version>
   </properties>
