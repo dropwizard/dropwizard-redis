@@ -1,3 +1,4 @@
+---
 type: redis
 node: "127.0.0.1:6379"
 timeout: 90s

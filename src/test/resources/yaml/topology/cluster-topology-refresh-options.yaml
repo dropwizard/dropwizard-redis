@@ -1,3 +1,4 @@
+---
 periodicRefreshEnabled: true
 refreshPeriod: 2m
 closeStaleConnections: false

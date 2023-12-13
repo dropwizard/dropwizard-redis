@@ -1,3 +1,4 @@
+---
 type: sentinel
 timeout: 90s
 clientName: test
