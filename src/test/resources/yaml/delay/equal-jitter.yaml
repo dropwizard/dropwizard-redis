@@ -1,3 +1,4 @@
+---
 type: equal-jitter
 base: 1
 lowerBound: 1s

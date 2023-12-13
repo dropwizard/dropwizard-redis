@@ -1,3 +1,4 @@
+---
 type: compression
 delegatee:
   type: string

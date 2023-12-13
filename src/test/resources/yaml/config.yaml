@@ -1,3 +1,4 @@
+---
 redis:
   type: basic
   name: my-redis-use-case
