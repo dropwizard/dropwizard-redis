@@ -1,3 +1,4 @@
+---
 type: full-jitter
 base: 1
 lowerBound: 1s

@@ -1,3 +1,4 @@
+---
 enabled: true
 keystore: src/test/resources/keystore.p12
 keystorePassword: hunter2
