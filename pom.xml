@@ -2,7 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-
+  <parent>
+    <groupId>io.dropwizard.modules</groupId>
+    <artifactId>module-parent</artifactId>
+    <version>4.0.0-rc.2</version>
+  </parent>
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
   <version>4.0.1-SNAPSHOT</version>
@@ -10,42 +14,8 @@
 
   <name>Dropwizard Redis</name>
   <description>Provides easy integration for Dropwizard applications with Redis</description>
-  <url>https://github.com/dropwizard/dropwizard-redis</url>
-
-  <licenses>
-    <license>
-      <name>Apache 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-  <scm>
-    <developerConnection>scm:git:git@github.com:dropwizard/dropwizard-redis.git</developerConnection>
-    <connection>scm:git:https://github.com/dropwizard/dropwizard-redis.git</connection>
-    <url>https://github.com/dropwizard/dropwizard-redis</url>
-    <tag>HEAD</tag>
-  </scm>
-
-  <ciManagement>
-    <system>GitHub Actions</system>
-    <url>https://github.com/dropwizard/dropwizard-redis/actions</url>
-  </ciManagement>
-
-  <issueManagement>
-    <system>GitHub Issues</system>
-    <url>https://github.com/dropwizard/dropwizard-redis/issues</url>
-  </issueManagement>
 
   <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
     <site>
       <id>dropwizard-redis</id>
       <url>http://dropwizard.github.io/dropwizard-redis/${project.version}</url>
@@ -61,30 +31,12 @@
   </developers>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
     <sonar.projectKey>dropwizard_dropwizard-redis</sonar.projectKey>
-    <sonar.organization>dropwizard</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
     <brave.version>5.16.0</brave.version>
-    <dropwizard.version>4.0.4</dropwizard.version>
     <lettuce.version>6.3.0.RELEASE</lettuce.version>
     <redis-mock.version>1.0.12</redis-mock.version>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.dropwizard</groupId>
-        <artifactId>dropwizard-dependencies</artifactId>
-        <version>${dropwizard.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -152,8 +104,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <source>8</source>
-          <target>8</target>
+          <release>8</release>
         </configuration>
       </plugin>
       <plugin>
@@ -183,104 +134,4 @@
       </extension>
     </extensions>
   </build>
-
-  <profiles>
-    <profile>
-      <id>release</id>
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <properties>
-        <maven.compiler.optimize>true</maven.compiler.optimize>
-        <gpg.keyname>EDA86E9FB607B5FC9223FB767D4868B53E31E7AD</gpg.keyname>
-      </properties>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-failsafe-plugin</artifactId>
-              <version>3.2.2</version>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <doclint>none</doclint>
-              <quiet>true</quiet>
-            </configuration>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-              <autoReleaseAfterClose>true</autoReleaseAfterClose>
-            </configuration>
-            <executions>
-              <execution>
-                <id>nexus-deploy</id>
-                <phase>deploy</phase>
-                <goals>
-                  <goal>deploy</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
