@@ -35,7 +35,7 @@
 
     <brave.version>5.16.0</brave.version>
     <lettuce.version>6.3.0.RELEASE</lettuce.version>
-    <redis-mock.version>1.0.12</redis-mock.version>
+    <redis-mock.version>1.0.13</redis-mock.version>
   </properties>
 
   <dependencies>
