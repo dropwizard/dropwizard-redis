@@ -33,7 +33,7 @@
   <properties>
     <sonar.projectKey>dropwizard_dropwizard-redis</sonar.projectKey>
 
-    <brave.version>5.16.0</brave.version>
+    <brave.version>5.17.0</brave.version>
     <lettuce.version>6.3.0.RELEASE</lettuce.version>
     <redis-mock.version>1.0.13</redis-mock.version>
   </properties>
