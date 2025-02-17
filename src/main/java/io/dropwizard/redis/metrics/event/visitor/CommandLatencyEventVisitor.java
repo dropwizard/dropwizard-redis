@@ -32,7 +32,7 @@ public class CommandLatencyEventVisitor implements EventVisitor {
     @Override
     public void visit(final CommandLatencyEvent event) {
         event.getLatencies().forEach((commandLatencyId, commandMetrics) -> {
-            final String commandType = commandLatencyId.commandType().name();
+            final String commandType = commandLatencyId.commandType().toString();
             final String metricName = metricNames.computeIfAbsent(commandType, (type) -> MetricRegistry.name(name, type));
             metrics.timer(metricName).update(commandMetrics.getCompletion().getMax(), commandMetrics.getTimeUnit());
         });
