@@ -46,11 +46,11 @@ public class DropwizardCommandLatencyRecorder implements CommandLatencyRecorder 
         CommandLatencyId commandLatencyId = CommandLatencyId.create(local, remote, protocolKeyword);
 
         Timer firstResponseTimer = firstResponseTimers.computeIfAbsent(commandLatencyId, c -> metricRegistry
-                .timer(name(METRIC_FIRST_RESPONSE, c.commandType().name())));
+                .timer(name(METRIC_FIRST_RESPONSE, c.commandType().toString())));
         firstResponseTimer.update(firstResponseLatency, TimeUnit.NANOSECONDS);
 
         Timer completionTimer = completionTimers.computeIfAbsent(commandLatencyId, c -> metricRegistry
-                .timer(name(METRIC_COMPLETION, c.commandType().name())));
+                .timer(name(METRIC_COMPLETION, c.commandType().toString())));
         completionTimer.update(completionLatency, TimeUnit.NANOSECONDS);
     }
 
