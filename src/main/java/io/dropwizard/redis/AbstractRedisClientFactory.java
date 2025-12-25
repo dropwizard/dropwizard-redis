@@ -20,12 +20,12 @@ import io.dropwizard.redis.metrics.event.visitor.DisconnectedEventVisitor;
 import io.dropwizard.redis.metrics.event.visitor.EventVisitor;
 import io.lettuce.core.api.StatefulConnection;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.jspecify.annotations.Nullable;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class AbstractRedisClientFactory<K, V> implements Discoverable {

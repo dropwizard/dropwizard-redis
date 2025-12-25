@@ -7,7 +7,7 @@ import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
 import io.lettuce.core.tracing.BraveTracing;
 import io.netty.util.concurrent.EventExecutorGroup;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 import reactor.core.scheduler.Schedulers;
 
 @JsonTypeName("default")

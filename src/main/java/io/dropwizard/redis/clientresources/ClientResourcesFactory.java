@@ -19,11 +19,11 @@ import io.dropwizard.redis.netty.DefaultEventExecutorGroupFactory;
 import io.dropwizard.redis.netty.EventExecutorGroupFactory;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.jspecify.annotations.Nullable;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class ClientResourcesFactory implements Discoverable {
