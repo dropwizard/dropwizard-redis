@@ -9,7 +9,7 @@
   </parent>
   <groupId>io.dropwizard.modules</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.0.0</version>
   <packaging>jar</packaging>
 
   <name>Dropwizard Redis</name>
@@ -134,4 +134,8 @@
       </extension>
     </extensions>
   </build>
+
+  <scm>
+    <tag>dropwizard-redis-5.0.0</tag>
+  </scm>
 </project>
