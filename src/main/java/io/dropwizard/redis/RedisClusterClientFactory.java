@@ -17,11 +17,12 @@ import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.codec.RedisCodec;
 import io.lettuce.core.resource.ClientResources;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
