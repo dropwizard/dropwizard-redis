@@ -1,2 +1,3 @@
 io.dropwizard.redis.uri.RedisModeURIFactory
 io.dropwizard.redis.uri.SentinelModeURIFactory
+io.dropwizard.redis.uri.StringURIFactory

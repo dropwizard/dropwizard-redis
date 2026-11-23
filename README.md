@@ -77,7 +77,7 @@ public void run(ExampleConfiguration config, Environment environment) {
 }
 ```
 
-
+Finally, set the configuration values for the client factory and connection in your application's `config.yml` file:
 ```yaml
 redis:
   type: basic
@@ -95,6 +95,15 @@ redis:
       enabled: false
 ```
 
+Alternatively, you can use a [Redis URI string](https://redis.github.io/lettuce/user-guide/connecting-redis/#uri-syntax) to configure the connection:
+```yaml
+redis:
+  node:
+    type: uri
+    uri: "redis://127.0.0.1:6379?clientName=person-app"
+```
+
+This also supports `rediss://` for TLS connections, and `redis-sentinel://` for Sentinel.
 
 ### Lettuce Cluster Client
 In your Dropwizard `Configuration` class, configure a `RedisClusterClientFactory`:
@@ -127,7 +136,7 @@ public void run(ExampleConfiguration config, Environment environment) {
 }
 ```
 
-Configure your factory in your `config.yml` file:
+Finally, configure your factory in your `config.yml` file:
 ```yaml
 redis-cluster:
   type: cluster
